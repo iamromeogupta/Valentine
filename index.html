@@ -84,7 +84,7 @@
       }
       formResponse.value = "No";
       userAgentInput.value = navigator.userAgent;
-      notificationForm.submit();
+      submitForm();
     });
 
     yesButton.addEventListener('click', () => {
@@ -93,9 +93,28 @@
       responseButtons.style.display = 'none';
       formResponse.value = "Yes";
       userAgentInput.value = navigator.userAgent;
-      notificationForm.submit();
       confetti();
+      submitForm();
     });
+
+    function submitForm() {
+      const formData = new FormData(notificationForm);
+      fetch(notificationForm.action, {
+        method: notificationForm.method,
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log('Form successfully submitted');
+        } else {
+          console.error('Error submitting form');
+        }
+      })
+      .catch(error => console.error('Error submitting form', error));
+    }
   </script>
 </body>
 </html>
