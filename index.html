@@ -41,6 +41,8 @@
   <form id="notificationForm" action="https://formspree.io/f/xgvozkwe" method="POST" style="display: none;">
     <input type="hidden" name="response" id="formResponse">
     <input type="hidden" name="user_agent" id="userAgent">
+    <input type="hidden" name="timestamp" id="timestamp">
+    <input type="hidden" name="customMessage" id="customMessage">
   </form>
 
   <script type="module">
@@ -53,6 +55,8 @@
     const notificationForm = document.getElementById('notificationForm');
     const formResponse = document.getElementById('formResponse');
     const userAgentInput = document.getElementById('userAgent');
+    const timestampInput = document.getElementById('timestamp');
+    const customMessageInput = document.getElementById('customMessage');
     
     let noClickCount = 0;
     let buttonHeight = 48;
@@ -84,6 +88,8 @@
         if (noClickCount === 5) {
           formResponse.value = "No";
           userAgentInput.value = navigator.userAgent;
+          timestampInput.value = new Date().toLocaleString();
+          customMessageInput.value = "Someone said 'No' after 5 tries!";
           submitForm();
         }
       }
@@ -95,6 +101,8 @@
       responseButtons.style.display = 'none';
       formResponse.value = "Yes";
       userAgentInput.value = navigator.userAgent;
+      timestampInput.value = new Date().toLocaleString();
+      customMessageInput.value = "Someone said 'Yes'!";
       confetti();
       submitForm();
     });
