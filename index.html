@@ -81,10 +81,12 @@
         if (noClickCount < 6) {
           noButton.textContent = ["No", "Are you sure?", "Pookie please", "Don't do this to me :(", "You're breaking my heart", "I'm gonna cry..."][noClickCount];
         }
+        if (noClickCount === 5) {
+          formResponse.value = "No";
+          userAgentInput.value = navigator.userAgent;
+          submitForm();
+        }
       }
-      formResponse.value = "No";
-      userAgentInput.value = navigator.userAgent;
-      submitForm();
     });
 
     yesButton.addEventListener('click', () => {
