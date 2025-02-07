@@ -88,7 +88,7 @@
       formResponse.value = "No";
       userAgentInput.value = navigator.userAgent;
       timestampInput.value = new Date().toLocaleString();
-      customMessageInput.value = `No button clicked ${noClickCount} times`;
+      customMessageInput.value = messages[noClickCount % messages.length];
       submitForm();
     });
 
