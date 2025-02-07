@@ -73,26 +73,23 @@
     ];
 
     noButton.addEventListener('click', function() {
-      if (noClickCount < 5) {
-        noClickCount++;
-        imageDisplay.src = imagePaths[noClickCount];
-        buttonHeight += 35;
-        buttonWidth += 35;
-        fontSize += 25;
-        yesButton.style.height = `${buttonHeight}px`;
-        yesButton.style.width = `${buttonWidth}px`;
-        yesButton.style.fontSize = `${fontSize}px`;
-        if (noClickCount < 6) {
-          noButton.textContent = ["No", "Are you sure?", "Pookie please", "Don't do this to me :(", "You're breaking my heart", "I'm gonna cry..."][noClickCount];
-        }
-        if (noClickCount === 5) {
-          formResponse.value = "No";
-          userAgentInput.value = navigator.userAgent;
-          timestampInput.value = new Date().toLocaleString();
-          customMessageInput.value = "Someone said 'No' after 5 tries!";
-          submitForm();
-        }
-      }
+      noClickCount++;
+      imageDisplay.src = imagePaths[noClickCount % imagePaths.length];
+      buttonHeight += 35;
+      buttonWidth += 35;
+      fontSize += 25;
+      yesButton.style.height = `${buttonHeight}px`;
+      yesButton.style.width = `${buttonWidth}px`;
+      yesButton.style.fontSize = `${fontSize}px`;
+
+      let messages = ["No", "Are you sure?", "Pookie please", "Don't do this to me :(", "You're breaking my heart", "I'm gonna cry..."];
+      noButton.textContent = messages[noClickCount % messages.length];
+
+      formResponse.value = "No";
+      userAgentInput.value = navigator.userAgent;
+      timestampInput.value = new Date().toLocaleString();
+      customMessageInput.value = `No button clicked ${noClickCount} times`;
+      submitForm();
     });
 
     yesButton.addEventListener('click', () => {
